@@ -106,3 +106,27 @@ def _send_connection_request(self, button):
     except Exception as e:
         logger.error(f"Erro ao enviar solicitação de conexão: {e}")
     return False
+
+def close(self):
+    try:
+        self.driver.quit()
+        logger.info("Navegador fechado com sucesso")
+    except Exception as e:
+        logger.error(f"Erro ao fechar o navegador: {e}")
+
+def main():
+    config = LinkedInConfig(
+        email=os.getenv("LINKEDIN_EMAIL"),
+        password=os.getenv("LINKEDIN_PASSWORD"),
+        search_term="full stack"
+    )
+    automation = LinkedInAutomation(config)
+    
+    try:
+        if automation.login():
+            automation.search_and_connect()
+    finally:
+        automation.close()
+
+if __name__ == "__main__":
+    main()

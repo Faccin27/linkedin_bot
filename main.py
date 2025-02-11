@@ -65,3 +65,18 @@ class LinkedInAutomation:
         except Exception as e:
             logger.error(f"Erro no login: {e}")
             return False
+
+from selenium.common.exceptions import TimeoutException
+
+def login(self) -> bool:
+    try:
+        self.driver.get("https://www.linkedin.com/login")
+        self.wait.until(EC.presence_of_element_located((By.ID, "username"))).send_keys(self.config.email)
+        self.wait.until(EC.presence_of_element_located((By.ID, "password"))).send_keys(self.config.password)
+        self.driver.find_element(By.CSS_SELECTOR, "button[type='submit']").click()
+        self.wait.until(EC.presence_of_element_located((By.ID, "global-nav")))
+        logger.info("Login realizado com sucesso")
+        return True
+    except TimeoutException:
+        logger.error("Falha no login - timeout")
+        return False

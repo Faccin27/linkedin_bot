@@ -18,8 +18,7 @@ driver.maximize_window()
 
 # Acessar LinkedIn
 driver.get("https://www.linkedin.com")
-sleep(5)
-
+sleep(2) 
 # Clicar para abrir a tela de login
 email = driver.find_element(By.XPATH, '//*[@id="main-content"]/section[1]/div/div/a')
 email.click()
@@ -30,8 +29,7 @@ putEmail = driver.find_element(By.XPATH, '//*[@id="username"]')
 putEmail.send_keys(linkedin_email)
 password = driver.find_element(By.XPATH, '//*[@id="password"]')
 password.send_keys(linkedin_password)
-sleep(5)
-
+sleep(2) 
 # Realizar pesquisa
 pesquisar = driver.find_element(By.XPATH, '//*[@id="global-nav-typeahead"]/input')
 pesquisar.click()

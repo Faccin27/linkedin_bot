@@ -85,3 +85,10 @@ while True:
                 sleep(1)
     except:
         print("[ERRO]")
+        
+        # Aguardar carregamento dos botões de conexão
+wait.until(
+    EC.presence_of_element_located(
+        (By.XPATH, '//button[@class="artdeco-button artdeco-button--2 artdeco-button--secondary ember-view"]')
+    )
+)

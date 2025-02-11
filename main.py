@@ -67,5 +67,7 @@ while True:
         print("[ERRO]")
         break
 
-# Fechar navegador
-driver.quit()
+try:
+    driver.quit()
+except Exception as e:
+    print(f"Erro ao fechar o navegador: {e}")

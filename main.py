@@ -79,3 +79,16 @@ def search_and_connect(self):
         sleep(3)
     except Exception as e:
         logger.error(f"Erro ao buscar conexões: {e}")
+
+def _scroll_page(self):
+    try:
+        last_height = self.driver.execute_script("return document.body.scrollHeight")
+        while True:
+            self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+            sleep(2)
+            new_height = self.driver.execute_script("return document.body.scrollHeight")
+            if new_height == last_height:
+                break
+            last_height = new_height
+    except Exception as e:
+        logger.error(f"Erro ao rolar a página: {e}")

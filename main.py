@@ -92,3 +92,17 @@ def _scroll_page(self):
             last_height = new_height
     except Exception as e:
         logger.error(f"Erro ao rolar a página: {e}")
+
+def _send_connection_request(self, button):
+    try:
+        button.click()
+        sleep(1)
+        send_buttons = self.driver.find_elements(By.CSS_SELECTOR, "button.artdeco-button--primary")
+        for send_button in send_buttons:
+            if "Enviar" in send_button.text:
+                send_button.click()
+                logger.info("Solicitação de conexão enviada com sucesso")
+                return True
+    except Exception as e:
+        logger.error(f"Erro ao enviar solicitação de conexão: {e}")
+    return False

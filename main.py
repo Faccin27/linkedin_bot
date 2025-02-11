@@ -56,3 +56,12 @@ for btn in buttons:
     if btn.text == "Pessoas":
         btn.click()
         sleep(5)
+        
+        conectar = driver.find_elements(
+    By.XPATH,
+    '//button[@class="artdeco-button artdeco-button--2 artdeco-button--secondary ember-view"]',
+)
+for conect in conectar:
+    if conect.text == "Conectar":
+        conect.click()
+        sleep(1)

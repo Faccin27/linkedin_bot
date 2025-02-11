@@ -40,3 +40,19 @@ pesquisar.send_keys("full stack")
 pesquisar.send_keys(Keys.ENTER)
 
 sleep(5)
+
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+# Aguardar carregamento da página
+wait = WebDriverWait(driver, 10)
+wait.until(
+    EC.presence_of_element_located((By.XPATH, '//button[@aria-pressed="false"]'))
+)
+
+# Clicar no filtro "Pessoas"
+buttons = driver.find_elements(By.XPATH, '//button[@aria-pressed="false"]')
+for btn in buttons:
+    if btn.text == "Pessoas":
+        btn.click()
+        sleep(5)

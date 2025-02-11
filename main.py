@@ -69,3 +69,5 @@ try:
     driver.quit()
 except Exception as e:
     print(f"Erro ao fechar o navegador: {e}")
+    
+    print("Script finalizado com sucesso!")

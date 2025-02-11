@@ -43,3 +43,25 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+class LinkedInAutomation:
+    def __init__(self, config: LinkedInConfig):
+        self.config = config
+        self.driver = self._setup_driver()
+        self.wait = WebDriverWait(self.driver, config.timeout)
+
+    def login(self) -> bool:
+        try:
+            self.driver.get("https://www.linkedin.com/login")
+            self.wait.until(EC.presence_of_element_located((By.ID, "username"))).send_keys(self.config.email)
+            self.wait.until(EC.presence_of_element_located((By.ID, "password"))).send_keys(self.config.password)
+            self.driver.find_element(By.CSS_SELECTOR, "button[type='submit']").click()
+            logger.info("Login realizado com sucesso")
+            return True
+        except Exception as e:
+            logger.error(f"Erro no login: {e}")
+            return False

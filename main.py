@@ -30,3 +30,13 @@ password = driver.find_element(By.XPATH, '//*[@id="password"]')
 password.send_keys(linkedin_password)
 
 sleep(5)
+
+from selenium.webdriver.common.keys import Keys
+
+# Realizar pesquisa após login
+pesquisar = driver.find_element(By.XPATH, '//*[@id="global-nav-typeahead"]/input')
+pesquisar.click()
+pesquisar.send_keys("full stack")
+pesquisar.send_keys(Keys.ENTER)
+
+sleep(5)

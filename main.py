@@ -65,3 +65,23 @@ for conect in conectar:
     if conect.text == "Conectar":
         conect.click()
         sleep(1)
+        
+        i = 1
+while True:
+    try:
+        if i >= 10:
+            i = 1
+            driver.execute_script("window.scroll(0, 9999)")
+            avancar = driver.find_element(By.XPATH, '//*[@aria-label="Avançar"]')
+            avancar.click()
+        conectar = driver.find_elements(
+            By.XPATH,
+            '//button[@class="artdeco-button artdeco-button--2 artdeco-button--secondary ember-view"]',
+        )
+        for conect in conectar:
+            i += 1
+            if conect.text == "Conectar":
+                conect.click()
+                sleep(1)
+    except:
+        print("[ERRO]")

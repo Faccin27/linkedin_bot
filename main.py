@@ -54,18 +54,6 @@ class LinkedInAutomation:
         self.driver = self._setup_driver()
         self.wait = WebDriverWait(self.driver, config.timeout)
 
-    def login(self) -> bool:
-        try:
-            self.driver.get("https://www.linkedin.com/login")
-            self.wait.until(EC.presence_of_element_located((By.ID, "username"))).send_keys(self.config.email)
-            self.wait.until(EC.presence_of_element_located((By.ID, "password"))).send_keys(self.config.password)
-            self.driver.find_element(By.CSS_SELECTOR, "button[type='submit']").click()
-            logger.info("Login realizado com sucesso")
-            return True
-        except Exception as e:
-            logger.error(f"Erro no login: {e}")
-            return False
-
 from selenium.common.exceptions import TimeoutException
 
 def login(self) -> bool:
@@ -80,3 +68,14 @@ def login(self) -> bool:
     except TimeoutException:
         logger.error("Falha no login - timeout")
         return False
+
+def search_and_connect(self):
+    try:
+        search_box = self.wait.until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, "input.search-global-typeahead__input"))
+        )
+        search_box.clear()
+        search_box.send_keys(self.config.search_term + Keys.ENTER)
+        sleep(3)
+    except Exception as e:
+        logger.error(f"Erro ao buscar conexões: {e}")
